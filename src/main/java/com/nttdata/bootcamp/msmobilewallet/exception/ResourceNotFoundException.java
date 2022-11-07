@@ -1,11 +1,15 @@
 package com.nttdata.bootcamp.msmobilewallet.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Class ResourceNotFoundException.
+ * MobileWallet microservice class ResourceNotFoundException.
+ */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 @Getter
 @Setter
@@ -20,6 +24,13 @@ public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException(String resourceName, String fieldName, String fieldValue) {
         super(String.format("%s no encontrada: %s = '%s'", resourceName, fieldName, fieldValue));
+        this.resourceName = resourceName;
+        this.fieldName = fieldName;
+        this.fieldValue = fieldValue;
+    }
+
+    public ResourceNotFoundException(String resourceName, String fieldValue) {
+        super(String.format("%s = '%s'", resourceName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;

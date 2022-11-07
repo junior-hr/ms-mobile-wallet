@@ -89,11 +89,11 @@ public class MobileWalletServiceImpl implements MobileWalletService {
 
     @Override
     public Mono<MobileWallet> save(MobileWalletDto mobileWalletDto) {
-        log.info("----save-------bankAccountDto : " + mobileWalletDto.toString());
+        log.info("----save-------mobileWalletDto : " + mobileWalletDto.toString());
         return Mono.just(mobileWalletDto)
                 .flatMap(mwd -> setDebitCard(mwd))
                 .flatMap(mwd -> validateNumberClientAccounts(mwd, "save").then(Mono.just(mwd)))
-                .flatMap(mwd -> mwd.MapperToMobileWallet())
+                .flatMap(mwd -> mwd.mapperToMobileWallet())
                 .flatMap(mobileWalletRepository::save);
     }
 
@@ -122,11 +122,11 @@ public class MobileWalletServiceImpl implements MobileWalletService {
 
     @Override
     public Mono<MobileWallet> update(MobileWalletDto mobileWalletDto, String idMobileWallet) {
-        log.info("----update-------mobileWalletDto -- idBankAccount: " + mobileWalletDto.toString() + " -- " + idMobileWallet);
+        log.info("----update-------mobileWalletDto -- idMobileWallet: " + mobileWalletDto.toString() + " -- " + idMobileWallet);
         return Mono.just(mobileWalletDto)
                 .flatMap(badto -> setDebitCard(badto))
                 .flatMap(mwd -> validateNumberClientAccounts(mwd, "save").then(Mono.just(mwd)))
-                .flatMap(mwd -> mwd.MapperToMobileWallet())
+                .flatMap(mwd -> mwd.mapperToMobileWallet())
                 .flatMap(mwd -> mobileWalletRepository.findById(idMobileWallet)
                         .switchIfEmpty(Mono.error(new ResourceNotFoundException("Monedero móvil", "idMobileWallet", idMobileWallet)))
                         .flatMap(x -> {
@@ -150,7 +150,7 @@ public class MobileWalletServiceImpl implements MobileWalletService {
             return mobileWalletRepository.findAllByCellphone(MobileWalletDto.getCellphone())
                     .count().flatMap(cnt -> {
                         if (cnt >= 1) {
-                            return Mono.error(new ResourceNotFoundException("Monedero móvil", "Cellphone", MobileWalletDto.getCellphone()));
+                            return Mono.error(new ResourceNotFoundException("Monedero móvil ya existe : Cellphone", MobileWalletDto.getCellphone()));
                         } else {
                             return Mono.just(true);
                         }
@@ -211,4 +211,5 @@ public class MobileWalletServiceImpl implements MobileWalletService {
         return mobileWalletRepository.findBalanceByDocumentNumber(documentNumber)
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("Cliente", "documentNumber", documentNumber)));
     }
+
 }

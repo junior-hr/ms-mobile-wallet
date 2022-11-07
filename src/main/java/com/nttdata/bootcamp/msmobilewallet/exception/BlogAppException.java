@@ -1,11 +1,14 @@
 package com.nttdata.bootcamp.msmobilewallet.exception;
 
-
+import org.springframework.http.HttpStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
+/**
+ * Class ResourceNotFoundException.
+ * MobileWallet microservice class ResourceNotFoundException.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

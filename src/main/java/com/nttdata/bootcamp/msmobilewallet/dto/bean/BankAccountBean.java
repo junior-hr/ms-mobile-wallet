@@ -1,13 +1,16 @@
 package com.nttdata.bootcamp.msmobilewallet.dto.bean;
 
+import java.util.List;
 import com.nttdata.bootcamp.msmobilewallet.dto.DebitCardDto;
 import com.nttdata.bootcamp.msmobilewallet.model.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
+/**
+ * Class BankAccountBean.
+ * MobileWallet microservice class BankAccountBean.
+ */
 @AllArgsConstructor
 @Getter
 @Setter
@@ -34,7 +37,10 @@ public abstract class BankAccountBean {
     private List<Movement> movements;
 
     public abstract Mono<Boolean> validateFields();
+
     public abstract Mono<Boolean> validateCommissionByAccountType();
+
     public abstract Mono<Boolean> validateMovementsByAccountType();
-    public abstract Mono<BankAccount> MapperToBankAccount(Client client);
+
+    public abstract Mono<BankAccount> mapperToBankAccount(Client client);
 }

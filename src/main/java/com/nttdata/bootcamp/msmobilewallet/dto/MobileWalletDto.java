@@ -1,17 +1,25 @@
 package com.nttdata.bootcamp.msmobilewallet.dto;
 
+import org.springframework.data.annotation.Id;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nttdata.bootcamp.msmobilewallet.model.BankAccount;
 import com.nttdata.bootcamp.msmobilewallet.model.Client;
 import com.nttdata.bootcamp.msmobilewallet.model.MobileWallet;
 import com.nttdata.bootcamp.msmobilewallet.model.Movement;
-import lombok.*;
-import lombok.extern.log4j.Log4j;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.annotation.Id;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
+/**
+ * Class MobileWalletDto.
+ * MobileWallet microservice class MobileWalletDto.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,6 +27,7 @@ import java.util.List;
 @ToString
 @Builder
 @Slf4j
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MobileWalletDto {
 
     @Id
@@ -44,8 +53,8 @@ public class MobileWalletDto {
 
     private List<Movement> movements;
 
-    public Mono<MobileWallet> MapperToMobileWallet() {
-        log.info("ini MapperToMobileWallet-------: ");
+    public Mono<MobileWallet> mapperToMobileWallet() {
+        log.info("ini mapperToMobileWallet-------: ");
 
         Client client = Client.builder()
                 .documentNumber(this.getDocumentNumber())

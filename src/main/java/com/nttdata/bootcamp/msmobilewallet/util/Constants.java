@@ -1,20 +1,24 @@
 package com.nttdata.bootcamp.msmobilewallet.util;
 
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import lombok.AllArgsConstructor;
 
+/**
+ * Class Constants.
+ * MobileWallet microservice class Constants.
+ */
 @AllArgsConstructor
 @Component
 public class Constants {
 
-	public static final String CLIENT_CB = "clientCB";
-	public static final String CREDIT_CB = "creditCB";
-	public static final String DEBITCARD_CB = "debitcardCB";
-	public static final String MOVEMENT_CB = "movementCB";
+    public static final String CLIENT_CB = "clientCB";
+    public static final String CREDIT_CB = "creditCB";
+    public static final String DEBITCARD_CB = "debitcardCB";
+    public static final String MOVEMENT_CB = "movementCB";
     public static final String BANKACCOUNT_CB = "bankaccountCB";
 
     public LocalDate dateToLocalDate(Date date) {

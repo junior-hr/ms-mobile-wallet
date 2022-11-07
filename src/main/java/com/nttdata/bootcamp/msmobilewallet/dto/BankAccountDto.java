@@ -1,17 +1,23 @@
 package com.nttdata.bootcamp.msmobilewallet.dto;
 
+import java.util.List;
 import com.nttdata.bootcamp.msmobilewallet.dto.bean.CheckingAccount;
 import com.nttdata.bootcamp.msmobilewallet.dto.bean.FixedTermAccount;
 import com.nttdata.bootcamp.msmobilewallet.dto.bean.SavingAccount;
 import com.nttdata.bootcamp.msmobilewallet.model.Headline;
 import com.nttdata.bootcamp.msmobilewallet.model.Movement;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
+/**
+ * Class BankAccountDto.
+ * MobileWallet microservice class BankAccountDto.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -53,7 +59,7 @@ public class BankAccountDto {
 
     private List<Movement> movements;
 
-    public Mono<SavingAccount> MapperToSavingAccount() {
+    public Mono<SavingAccount> mapperToSavingAccount() {
         log.info("ini MapperToSaving-------this: " + this.toString());
         SavingAccount savingAccount = SavingAccount.builder()
                 .idBankAccount(this.getIdBankAccount())
@@ -74,7 +80,8 @@ public class BankAccountDto {
         log.info("fn MapperToSaving-------savingAccount: " + savingAccount.toString());
         return Mono.just(savingAccount);
     }
-    public Mono<FixedTermAccount> MapperToFixedTermAccount() {
+
+    public Mono<FixedTermAccount> mapperToFixedTermAccount() {
         log.info("ini MapperToFixedTermAccount-------: ");
         FixedTermAccount fixedTermAccount = FixedTermAccount.builder()
                 .idBankAccount(this.getIdBankAccount())
@@ -95,7 +102,8 @@ public class BankAccountDto {
         log.info("fn MapperToFixedTermAccount-------: ");
         return Mono.just(fixedTermAccount);
     }
-    public Mono<CheckingAccount> MapperToCheckingAccount() {
+
+    public Mono<CheckingAccount> mapperToCheckingAccount() {
         log.info("ini MapperToCheckingAccount-------: ");
         CheckingAccount checkingAccount = CheckingAccount.builder()
                 .idBankAccount(this.getIdBankAccount())

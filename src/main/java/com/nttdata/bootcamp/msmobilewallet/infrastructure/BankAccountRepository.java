@@ -31,9 +31,9 @@ public class BankAccountRepository {
         WebClientConfig webconfig = new WebClientConfig();
         return webconfig.setUriData("http://" + propertyHostMsBankAccount + ":8085")
                 .flatMap(d -> webconfig.getWebclient().get().uri("/api/bankaccounts/debitCardNumber/" + debitCardNumber).retrieve()
-                        .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new Exception("Error 400")))
-                        .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new Exception("Error 500")))
-                        .bodyToMono(BankAccount.class)
+                                .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new Exception("Error 400")))
+                                .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new Exception("Error 500")))
+                                .bodyToMono(BankAccount.class)
                         // .transform(it -> reactiveCircuitBreakerFactory.create("parameter-service").run(it, throwable -> Mono.just(new BankAccount())) )
                 );
     }

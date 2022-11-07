@@ -1,19 +1,25 @@
 package com.nttdata.bootcamp.msmobilewallet.model;
 
-import lombok.Builder;
-import lombok.ToString;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * Class DebitCard.
+ * MobileWallet microservice class DebitCard.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DebitCard {
 
     @Id
